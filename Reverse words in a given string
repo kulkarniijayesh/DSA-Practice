@@ -1,0 +1,38 @@
+using System.Linq;
+public class GFG {
+	static public void Main () {
+		int cases = Convert.ToInt32(Console.ReadLine());
+            
+            for (int i = 0; i < cases; i++)
+            {
+                char[] inStr = Console.ReadLine().ToArray();
+                //Reverse entire string first
+                inStr = ReverseString(inStr, 0, inStr.Length - 1);
+
+                //Reverse each word
+                int l = 0;
+                int r = 0;
+                while(r <= inStr.Length)
+                {
+                    if (r == inStr.Length || inStr[r] == '.')
+                    {
+                        ReverseString(inStr, l, r-1);
+                        l = r + 1;
+                    }
+                    r++;
+                }
+                Console.WriteLine(inStr);
+            }
+	}
+	static char[] ReverseString(char[] inStr, int l, int r)
+        {
+            while(l<r)
+            {
+                char temp = inStr[r];
+                inStr[r] = inStr[l];
+                inStr[l] = temp;
+                l++; r--;
+            }
+            return inStr;
+        }
+}
