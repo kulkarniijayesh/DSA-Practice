@@ -1,0 +1,54 @@
+//https://practice.geeksforgeeks.org/problems/who-will-win/0
+public class GFG {
+	static public void Main () {
+		int cases = Convert.ToInt32(Console.ReadLine());
+            int[] results = new int[cases];
+
+            for (int i = 0; i < cases; i++)
+            {
+                string[] str = Console.ReadLine().Split(' ');
+                results[i] = whoWillWin(Convert.ToInt32(str[0]), Convert.ToInt32(str[1]), Convert.ToInt32(str[2]), Convert.ToInt32(str[3]));
+            }
+
+            foreach (var item in results)
+            {
+                Console.WriteLine(item);
+            }
+	}
+	
+	static int whoWillWin(int maxVal, int x, int linearSpeed, int binarySpeed)
+        {
+            int u = maxVal - 1; //9
+            int l = 0; //0
+            int iterBinary = 0;
+            int[] array = new int[maxVal]; 
+
+            for (int i = 0; i <= maxVal-1; i++)
+            {
+                array[i] = i + 1;
+            }
+
+            while (l<=u)
+            {
+                int mid = l + (u - l) / 2;
+                iterBinary++;
+                if (x == array[mid])
+                {
+                    l = u+1;
+                }
+                if (x < array[mid])
+                {
+                    u = mid - 1;
+                }
+                if (x > array[mid])
+                {
+                    l = mid + 1;
+                }
+            }
+
+            if((x * linearSpeed) == (iterBinary * binarySpeed))
+                return(0);
+            return((x * linearSpeed) > (iterBinary * binarySpeed) ? 2 : 1);
+
+        }
+}
