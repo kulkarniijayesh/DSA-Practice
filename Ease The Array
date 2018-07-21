@@ -1,0 +1,48 @@
+//https://practice.geeksforgeeks.org/problems/ease-the-array/0
+public class GFG {
+	static public void Main () {
+		int cases = Convert.ToInt32(Console.ReadLine());
+            
+            for (int i = 0; i < cases; i++)
+            {
+                int n = Convert.ToInt32(Console.ReadLine());
+                string[] inputArray = Console.ReadLine().Split(' ');
+                int[] array = new int[n];
+
+                for (int j = 0; j < n; j++)
+                {
+                    array[j] = int.Parse(inputArray[j]);
+                }
+
+                int[] outputArray = new int[n];
+                int indexPointer = 0;
+                //First loop through array -> for replacing double items to invalid
+                for (int k = 0; k < n-1; k++)
+                {
+                    if (array[k] == array[k + 1])
+                    {
+                        array[k + 1] = 0;
+                        array[k] = array[k] * 2;
+                    }
+
+                    if (array[k] != 0)
+                    {
+                        outputArray[indexPointer] = array[k];
+                        indexPointer++;
+                    }
+                }
+                if (array[n-1] != 0)
+                {
+                    outputArray[indexPointer] = array[n-1];
+                }
+                
+                
+                for (int z = 0; z < n; z++)
+                {
+                    Console.Write(outputArray[z]+" ");
+                }
+                Console.WriteLine();
+            }
+
+	}
+}
