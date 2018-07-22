@@ -1,0 +1,96 @@
+//https://practice.geeksforgeeks.org/problems/recursively-remove-all-adjacent-duplicates/0
+
+using System;
+using System.Linq;
+public class GFG {
+	static public void Main () 
+	{
+		//https://practice.geeksforgeeks.org/problems/recursively-remove-all-adjacent-duplicates/0
+
+            int cases = Convert.ToInt32(Console.ReadLine());
+            string[] results = new string[cases];
+            
+            for (int i = 0; i < cases; i++)
+            {
+                char[] array = Console.ReadLine().ToArray();
+                bool nextPassRequired = true;
+                while(nextPassRequired)
+                {
+                    if(results[i] == null)
+                        {
+                        results[i] = RemoveDuplicateChars(array);
+                        }
+                    else
+                        {
+                        string newOutString = "";
+                        newOutString = RemoveDuplicateChars(results[i].ToArray());
+                        if(newOutString == results[i])
+                            nextPassRequired = false;
+                        else
+                            results[i] = newOutString;
+                        }
+                            
+                }
+                
+            }
+            for(int i = 0; i < cases; i++)
+            {
+                Console.WriteLine(results[i]);
+                
+            }
+	}
+	
+	static public string RemoveDuplicateChars(char[] array)
+	{
+	    int l = 0;
+        int r = 1;
+        bool duplicate = false;
+        if(array.Count() == 0)
+            return "";
+        while (r < array.Length)
+        {
+            if (!duplicate)
+            {
+                if (array[r] == array[l])
+                {
+                    duplicate = true;
+                    r++;
+                }
+                else
+                {
+                    duplicate = false;
+                    l++;
+                    array[l] = array[r];
+                    r++;
+                }
+                
+            }
+            else
+            {
+                if (array[r] == array[l])
+                {
+                    duplicate = true;
+                    r++;
+                }
+                else
+                {
+                    duplicate = false;
+                    array[l] = array[r];
+                    r++;
+                }
+               
+            }
+        }
+        if (duplicate)
+            l--;
+
+        string outString = "";
+
+        for (int j = 0; j <= l; j++)
+        {
+            outString += array[j];
+        }
+        return outString;
+	    
+	}
+}
